@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+ 
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/components.css" media="screen" />
+        <title>Emaús - Controle de doações</title>
+        
+        
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            
+            <div align="center">
+                
+                <p:layoutUnit position="center">
+                    
+                    <ui:insert name="content">
+                        O que estiver aqui será substituido!
+                    </ui:insert>
+                </p:layoutUnit>
+            </div>
+            
+            <p:layoutUnit position="north">
+                <h:panelGrid columns="2" >
+                    <p:graphicImage library="images" name="emausamorevida.jpg" />
+                    <h1>Emaús - Controle de doações </h1>
+                </h:panelGrid>
+                <h:form>
+                <p:menubar>
+                    <p:submenu label="Principal">
+                        <p:menuitem value="Principal" url="/" icon="ui-icon-disk" />
+                    </p:submenu>
+                    <p:submenu label="Cadastros Básicos">
+                        <p:menuitem value="Tipos de Telefone" outcome="/view/tipoTelefone/ListTipoTelefone" icon="ui-icon-disk" />
+                        <p:menuitem value="Municípios" outcome="/view/cidade/ListCidade" icon="ui-icon-disk" />
+                        <p:menuitem value="Itens de Doação" outcome="/view/tipoItemDoacao/ListTipoItemDoacao" icon="ui-icon-disk" />
+                    </p:submenu>
+                    <p:submenu label="Doações">
+                        <p:menuitem value="Doadores" outcome="/view/doador/ListDoador" icon="ui-icon-disk" />
+                    </p:submenu>
+                </p:menubar>
+                    </h:form>
+                
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template/common/layoutPrincipal.xhtml">
+        <ui:define name="content">
+            <h:form id="FormDoador" >
+                <p:panelGrid  >
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="4">Doadores</p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="DDD" for="ddd" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="ddd" value="#{doadorController.paramDdd}" title="ddd" size="5"/>
+                        </p:column>  
+                        <p:column>
+                            <p:outputLabel value="Telefone" for="telefone" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="telefone" value="#{doadorController.paramTelefone}" title="telefone" size="10"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Nome" for="nome" />
+                        </p:column>
+                        <p:column colspan="3">
+                            <p:inputText id="nome" value="#{doadorController.paramDoador}" title="nomeDoador" size="40" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column/>
+                        <p:column >
+                            <p:commandButton action="#{doadorController.performSearch}" icon="ui-icon-search"  ajax="true" update="@form" value="#{bundle.BotaoPesquisar}"/>
+                        </p:column>
+                        <p:column colspan="2" >
+                            <p:commandButton action="#{doadorController.resetSearch}" value="#{bundle.BotaoLimparPesquisa}" ajax="true" update="@form" icon="ui-icon-cancel" resetValues="true"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                <p:dataTable var="item" value="#{doadorController.items}" 
+                             rows="5" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             rowIndexVar="rowIx"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 eq 0 ? 'ui-datatable-even' : 'ui-datatable-odd'}"
+                             id="TabelaDoador">
+                    <p:column style="width:32px;text-align: center">
+                        <p:selectBooleanCheckbox value="#{doadorController.checked[item.id]}" />
+                    </p:column > 
+                    <p:column style="width:35px" headerText="Id" sortBy="#{item.id}">
+                        <h:outputText value="#{item.id}" />
+                    </p:column>
+                    <p:column  headerText="Nome" sortBy="#{item.nomeDoador}">
+                        <h:outputText value="#{item.nomeDoador}" />
+                    </p:column>
+                    
+                    <p:column style="width:100px" headerText="Município" sortBy="#{item.cidade.nomeMunicipio}">
+                        <h:outputText value="#{item.cidade.nomeMunicipio}" />
+                    </p:column>
+                    
+                    <p:column style="width:100px" headerText="Bairro" sortBy="#{item.bairro}">
+                        <h:outputText value="#{item.bairro}" />
+                    </p:column>
+                    
+                    <p:column  headerText="Logradouro" sortBy="#{item.logradouro}">
+                        <h:outputText value="#{item.logradouro}" />
+                    </p:column>
+                    <p:column style="width:125px" headerText="Telefone" >
+                        <h:outputText value="#{item.maskDdd1} #{item.maskTelefone1}" />
+                    </p:column>
+                    <p:column headerText="Ações" style="width:100px;text-align: center">
+                        <p:commandButton action="#{doadorController.prepareView}" icon="ui-icon-search"  ajax="false"/>
+                        <p:commandButton action="#{doadorController.prepareEdit}" icon="ui-icon-pencil" ajax="false"/>
+                    </p:column >
+                    <f:facet name="footer">
+                        <p:commandButton action="#{doadorController.prepareCreate}" icon="ui-icon-plus" value="Novo" ajax="false" />
+                        <p:commandButton actionListener="#{doadorController.destroyList}" icon="ui-icon-trash" value="Excluir" update="TabelaDoador">
+                          <p:confirm header="Confirmar exclusão" message="Quer realmente excluir o registro ?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                    </f:facet>
+                </p:dataTable>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

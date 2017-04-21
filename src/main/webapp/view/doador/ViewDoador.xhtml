@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template/common/layoutPrincipal.xhtml">
+        
+        <ui:define name="content">
+            
+            <h:form>
+                <p:fieldset legend="Doador Id: #{doadorController.selected.id}" style="margin-bottom:20px">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        
+                        
+                        <h:outputText value="Telefone"/>
+                        <h:outputText value="#{doadorController.selected.maskDdd1} #{doadorController.selected.maskTelefone1}" title="telefone"/>
+                        <h:outputText value="Nome"/>
+                        <h:outputText value="#{doadorController.selected.nomeDoador}" title="nome"/>
+                        <h:outputText value="Município"/>
+                        <h:outputText value="#{doadorController.selected.cidade.nomeMunicipio}" title="nomeMunicipio"/>
+                        <h:outputText value="CEP"/>
+                        <h:outputText value="#{doadorController.selected.cep}" title="cep"/>
+                        <h:outputText value="Bairro"/>
+                        <h:outputText value="#{doadorController.selected.bairro}" title="bairro"/>
+                        <h:outputText value="Logradouro"/>
+                        <h:outputText value="#{doadorController.selected.logradouro}" title="logradouro"/>
+                        <h:outputText value="Número"/>
+                        <h:outputText value="#{doadorController.selected.numero}" title="numero"/>
+                        <h:outputText value="Ponto de referência"/>
+                        <h:outputText value="#{doadorController.selected.referencia}" title="referencia"/>
+                        <h:outputText value="Telefone 2"/>
+                        <h:outputText value="#{doadorController.selected.maskDdd2} #{doadorController.selected.maskTelefone2}" title="telefone"/>
+                    </h:panelGrid>
+                </p:fieldset>
+                
+                <br />
+                <p:commandButton action="#{doadorController.prepareCreate}" icon="ui-icon-plus" value="Novo" ajax="false" />
+                <p:commandButton action="#{doadorController.prepareList}" icon="ui-icon-arrowreturn-1-w" value="Voltar" ajax="false" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template/common/layoutPrincipal.xhtml">
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <p:panelGrid>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="DDD" for="ddd"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputMask id="ddd" value="#{doadorController.selected.ddd1}" title="ddd" required="true" requiredMessage="#{bundle.CampoObrigatorio}" validatorMessage="O DDD do telefone está errado ou incompleto" mask="(999)" converter="tirarMascara" size="5">
+                                <f:validateLength minimum="3" maximum="3" />
+                            </p:inputMask>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Telefone" for="telefone" />
+                        </p:column>
+                        <p:column>
+                            <p:inputMask id="telefone" value="#{doadorController.selected.telefone1}" title="Telefone" required="true" requiredMessage="#{bundle.CampoObrigatorio}" validatorMessage="O número do telefone está errado ou incompleto" mask="99999-9999"  converter="tirarMascara" size="10">
+                            <f:validateLength minimum="9" maximum="9" />
+                            </p:inputMask>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="CEP" for="cep" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="cep" value="#{doadorController.selected.cep}" title="cep" size="10"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Nome" for="nomeDoador" />
+                        </p:column>
+                        <p:column colspan="5">
+                            <p:inputText id="nomeDoador" value="#{doadorController.selected.nomeDoador}" title="Nome" required="true" requiredMessage="#{bundle.CampoObrigatorio}" size="80"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Municipio" for="municipio" />
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:selectOneMenu id="municipio" value="#{doadorController.selected.cidade}" style="width:300px" >
+                                <f:selectItem itemLabel="Escolha um município..." itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{cidadeController.itemsAvailableSelectOne}" />
+                            </p:selectOneMenu>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Bairro" for="bairro" />
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:inputText id="bairro" value="#{doadorController.selected.bairro}" title="bairro" size="30"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Logradouro" for="logradouro" />
+                        </p:column>
+                        <p:column colspan="5">
+                            <p:inputText id="logradouro" value="#{doadorController.selected.logradouro}" title="logradouro" size="80"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Numero" for="numero" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="numero" value="#{doadorController.selected.numero}" title="numero" size="5"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="DDD 2" for="ddd2"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="ddd2" value="#{doadorController.selected.ddd2}" title="ddd2" size="5"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Telefone 2" for="telefone2" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="telefone2" value="#{doadorController.selected.telefone2}" title="telefone2" size="10"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Ponto de Referência" for="referencia" />
+                        </p:column>
+                        <p:column colspan="5">
+                            <p:inputText id="referencia" value="#{doadorController.selected.referencia}" title="referencia" size="80"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="4"/>
+                        <p:column>
+                            <p:commandButton action="#{doadorController.update}" icon="ui-icon-disk"  ajax="false" value="Salvar"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton action="#{doadorController.prepareList}" value="Cancelar" immediate="true" icon="ui-icon-cancel"  ajax="false" />
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

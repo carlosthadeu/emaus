@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+
+    <ui:composition template="/template/common/layoutPrincipal.xhtml">
+        <ui:define name="content">
+            <h:form id="FormTipoItemDoacao" >
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="2">Tipos de Item de Doação</p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:outputLabel value="Tipo de Item de Doação" for="tipoItemDoacao" />
+                    <p:inputText id="tipoItemDoacao" value="#{tipoItemDoacaoController.paramTipoItemDoacao}" title="Tipo de item de doação - Pesquisar"/>
+                    <p:column/>
+                    <p:panelGrid columns="2">
+                        <p:commandButton action="#{tipoItemDoacaoController.performSearch}" icon="ui-icon-search"  ajax="true" update="@form" value="#{bundle.BotaoPesquisar}"/>
+                        <p:commandButton action="#{tipoItemDoacaoController.resetSearch}" value="#{bundle.BotaoLimparPesquisa}" ajax="true" update="@form" icon="ui-icon-cancel"/>
+                    </p:panelGrid>
+                </p:panelGrid>
+                <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                <p:dataTable var="item" value="#{tipoItemDoacaoController.items}" 
+                             rows="5" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             rowIndexVar="rowIx"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 eq 0 ? 'ui-datatable-even' : 'ui-datatable-odd'}"
+                             id="TabelaTipoItemDoacao">
+                    <p:column style="width:32px;text-align: center">
+                        <p:selectBooleanCheckbox value="#{tipoItemDoacaoController.checked[item.id]}" />
+                    </p:column > 
+                    <p:column style="width:100px" headerText="Id" sortBy="#{item.id}">
+                        <h:outputText value="#{item.id}" />
+                    </p:column>
+                    <p:column headerText="Tipo de Item de Doação" sortBy="#{item.tipoItemDoacao}">
+                        <h:outputText value="#{item.tipoItemDoacao}" />
+                    </p:column>
+                    <p:column headerText="Ações" style="width:100px;text-align: center">
+                        <p:commandButton action="#{tipoItemDoacaoController.prepareView}" icon="ui-icon-search"  ajax="false"/>
+                        <p:commandButton action="#{tipoItemDoacaoController.prepareEdit}" icon="ui-icon-pencil" ajax="false"/>
+                    </p:column >
+                    <f:facet name="footer">
+                        <p:commandButton action="#{tipoItemDoacaoController.prepareCreate}" icon="ui-icon-plus" value="Novo" ajax="false" />
+                        <p:commandButton actionListener="#{tipoItemDoacaoController.destroyList}" icon="ui-icon-trash" value="Excluir" update="TabelaTipoItemDoacao">
+                          <p:confirm header="Confirmar exclusão" message="Quer realmente excluir o registro ?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                    </f:facet>
+                </p:dataTable>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
